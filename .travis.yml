@@ -1,0 +1,13 @@
+language: python
+python:
+- "3.8"
+before_install:
+    - pip install pytest
+    - pip install pytest-cov
+    - pip install coveralls
+    - pip install pydantic
+    - pip install validated-dc
+script:
+  - pytest  --cov=valdec/
+after_success:
+  - coveralls

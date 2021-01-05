@@ -1,5 +1,7 @@
 # valdec
 
+[![PyPI version](https://badge.fury.io/py/valdec.svg)](https://badge.fury.io/py/valdec) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/valdec)
+
 Decorator for validating function arguments and result.
 
 ## Installation
