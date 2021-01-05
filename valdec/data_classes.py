@@ -16,13 +16,12 @@ class Settings:
 
         :function_for_validation: Cсылка на функцию, которая будет
                                   использоваться непосредственно для валидации.
-                                  Поддерживаются разные методы валидации.
                                   Реализация поддерживаемых функций находится
-                                  в папке validators.
+                                  в файлах val_*.py.
                                   Можно сделать свою функцию для валидации и
                                   указать ее в этом поле.
                                   Функция "по умолчанию" установлена в файле
-                                  decorators.py.
+                                  dec.py.
 
         "is_replace_the_args":    Если True, то будет производится замена
                                   исходных значений полей аргументов на
@@ -37,7 +36,7 @@ class Settings:
                                   передать класс для валидации данных)
     """
 
-    function_for_validation: Optional[Callable]
+    function_for_validation: Callable
     is_replace_the_args: bool = True
     is_replace_the_result: bool = True
     extra: dict = field(default_factory=dict)
