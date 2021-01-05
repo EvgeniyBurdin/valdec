@@ -23,7 +23,7 @@ from valdec.dec import validate
 from pydantic import StrictInt, StrictStr
 
 
-@validate  # all with annotations and results
+@validate  # all arguments with annotations and "return"
 def func(i: StrictInt, s: StrictStr) -> StrictInt:
     return i
 
@@ -37,14 +37,14 @@ def func(i: StrictInt, s: StrictStr) -> StrictInt:
 assert func("not int", "s") == "not int"
 
 
-@validate("s", "return")  # only "s" and return
+@validate("s", "return")  # only "s" and "return"
 def func(i: StrictInt, s: StrictStr) -> StrictInt:
     return int(i)
 
 assert func("1", "s") == 1
 
 
-@validate("i", exclude=True)  # only "s" and return
+@validate("i", exclude=True)  # only "s" and "return"
 def func(i: StrictInt, s: StrictStr) -> StrictInt:
     return int(i)
 
@@ -75,7 +75,7 @@ def validate(*args, **kwargs):
     return _validate(*args, **kwargs)
 
 
-@validate  # all with annotations and results
+@validate  # all arguments with annotations and "return"
 def func(i: int, s: str) -> int:
     return i
 
@@ -89,14 +89,14 @@ def func(i: int, s: str) -> int:
 assert func("not int", "s") == "not int"
 
 
-@validate("s", "return")  # only "s" and return
+@validate("s", "return")  # only "s" and "return"
 def func(i: int, s: str) -> int:
     return int(i)
 
 assert func("1", "s") == 1
 
 
-@validate("i", exclude=True)  # only "s" and return
+@validate("i", exclude=True)  # only "s" and "return"
 def func(i: int, s: str) -> int:
     return int(i)
 
