@@ -1,6 +1,6 @@
 # valdec
 
-[![PyPI version](https://badge.fury.io/py/valdec.svg)](https://badge.fury.io/py/valdec) [![Build Status](https://travis-ci.com/EvgeniyBurdin/valdec.svg?branch=main)](https://travis-ci.com/EvgeniyBurdin/valdec) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/valdec)
+[![PyPI version](https://badge.fury.io/py/valdec.svg)](https://badge.fury.io/py/valdec) [![Build Status](https://travis-ci.com/EvgeniyBurdin/valdec.svg?branch=main)](https://travis-ci.com/EvgeniyBurdin/valdec) [![Coverage Status](https://coveralls.io/repos/github/EvgeniyBurdin/valdec/badge.svg?branch=main)](https://coveralls.io/github/EvgeniyBurdin/valdec?branch=main) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/valdec)
 
 Decorator for validating function arguments and result.
 
