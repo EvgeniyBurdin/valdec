@@ -65,19 +65,41 @@ def get_annotations_values_dicts(
     return annotations, values
 
 
+class ValidationError(Exception):
+    pass
+
+
+class ValidationArgumentsError(ValidationError):
+    pass
+
+
+class ValidationReturnError(ValidationError):
+    pass
+
+
 def run_validation(
     fields: List[FieldData],
     function_for_validation: Callable,
     is_replace: bool,
-    extra: dict
+    extra: dict,
+    is_arguments: bool,
 ) -> Dict[str, Any]:
     """ Преобразует список полей в словари, запускает валидацию и возвращает
         ее результат.
     """
+    try:
+        annotations, values = get_annotations_values_dicts(fields)
+        result = function_for_validation(
+            annotations, values, is_replace, extra
+        )
+    except Exception as error:
 
-    annotations, values = get_annotations_values_dicts(fields)
+        error_class = ValidationArgumentsError if is_arguments \
+            else ValidationReturnError
 
-    return function_for_validation(annotations, values, is_replace, extra)
+        raise error_class(f"Validation error {type(error)}: {str(error)}.")
+
+    return result
 
 
 def replace_args_kwargs(
@@ -163,7 +185,8 @@ def before(
                 data_for_validation,
                 settings.function_for_validation,
                 settings.is_replace_the_args,
-                settings.extra
+                settings.extra,
+                is_arguments=True,
             )
             if replaceable_args is not None:
                 args, kwargs = replace_args_kwargs(
@@ -203,7 +226,8 @@ def after(
             data_for_validation,
             settings.function_for_validation,
             settings.is_replace_the_result,
-            settings.extra
+            settings.extra,
+            is_arguments=False,
         )
         if replaceable is not None:
             result = replaceable["result"]

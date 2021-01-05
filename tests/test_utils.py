@@ -1,10 +1,9 @@
 import pytest
-
 from pydantic import StrictInt
-
 from valdec.data_classes import FieldData
 from valdec.dec import default_settings
-from valdec.utils import (after, before, get_annotations_values_dicts,
+from valdec.utils import (ValidationArgumentsError, ValidationReturnError,
+                          after, before, get_annotations_values_dicts,
                           get_data_for_validation, get_data_with_annotations,
                           get_names_from_decorator, replace_args_kwargs,
                           run_validation)
@@ -108,7 +107,8 @@ def test_run_validation():
         fields=fields,
         function_for_validation=pydantic_val_func,
         is_replace=False,
-        extra={}
+        extra={},
+        is_arguments=True,
     )
     assert result is None
 
@@ -230,7 +230,7 @@ def test_before():
     )
     assert (new_args, new_kwargs) == (args, kwargs)
 
-    with pytest.raises(Exception) as error:
+    with pytest.raises(ValidationArgumentsError) as error:
 
         # Значение "1" передаем в аргумент i_i_i_i: StrictInt, при вызове
         # before() должно подняться исключение
@@ -269,7 +269,7 @@ def test_after():
     )
     assert new_result == result
 
-    with pytest.raises(Exception) as error:
+    with pytest.raises(ValidationReturnError) as error:
 
         # Функци вернула невалидное значение (не StrictInt), должно
         # подняться исключение
@@ -295,7 +295,7 @@ def test_after():
     )
     assert new_result == result
 
-    with pytest.raises(Exception) as error:
+    with pytest.raises(ValidationReturnError) as error:
 
         # Функци вернула невалидное значение (не None), должно
         # подняться исключение
