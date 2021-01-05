@@ -25,7 +25,7 @@ from pydantic import BaseModel, StrictInt, StrictStr
 from valdec.dec import validate
 
 
-@validate  # all with annotations and results
+@validate  # all with annotations and return
 def func(i: StrictInt, s: StrictStr) -> StrictInt:
     return i
 
@@ -109,7 +109,7 @@ def validate(*args, **kwargs):
     return _validate(*args, **kwargs)
 
 
-@validate  # all with annotations and results
+@validate  # all with annotations and return
 def func(i: int, s: str) -> int:
     return i
 

@@ -1,8 +1,8 @@
 import pytest
-
 from pydantic import StrictInt, StrictStr
 
 from valdec.dec import validate
+from valdec.utils import ValidationArgumentsError, ValidationReturnError
 
 
 @validate  # Проверяет все аргументы с аннотацией, и return
@@ -25,13 +25,13 @@ def test_validate_simple_exclude_false():
     s = "string"
 
     assert func_1(1, s) == s
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationArgumentsError):
         func_1("1", s)  # Ошибка в аргументе
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationArgumentsError):
         func_1(1, 2)    # Ошибка в аргументе
 
     assert func_2(1, s) == s
-    with pytest.raises(Exception) as error:
+    with pytest.raises(ValidationReturnError) as error:
         func_2(1, 2)
     # Была ошибка в результате, так как "s" не проверяем, убедимся в этом:
     assert "result" in str(error)

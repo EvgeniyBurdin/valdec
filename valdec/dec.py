@@ -87,7 +87,9 @@ def validate(
 
             result = func(*args, **kwargs)
 
-            result = after(func, result, names_or_func, exclude, settings)
+            result = after(
+                func, result, names_or_func, exclude, settings
+            )
 
             return result
 
@@ -107,15 +109,17 @@ def async_validate(
         @functools.wraps(func)
         async def wrapper(*args, **kwargs):
 
-            args, kwargs = before(
+            args, kwargs = before(  # pragma: no cover
                 func, args, kwargs, names_or_func, exclude, settings,
             )
 
-            result = await func(*args, **kwargs)
+            result = await func(*args, **kwargs)  # pragma: no cover
 
-            result = after(func, result, names_or_func, exclude, settings)
+            result = after(  # pragma: no cover
+                func, result, names_or_func, exclude, settings
+            )
 
-            return result
+            return result  # pragma: no cover
 
         return wrapper
 
