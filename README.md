@@ -1,8 +1,11 @@
 # valdec
 
 [![PyPI version](https://badge.fury.io/py/valdec.svg)](https://badge.fury.io/py/valdec) [![Build Status](https://travis-ci.com/EvgeniyBurdin/valdec.svg?branch=main)](https://travis-ci.com/EvgeniyBurdin/valdec) [![Coverage Status](https://coveralls.io/repos/github/EvgeniyBurdin/valdec/badge.svg?branch=main)](https://coveralls.io/github/EvgeniyBurdin/valdec?branch=main) [![Total alerts](https://img.shields.io/lgtm/alerts/g/EvgeniyBurdin/valdec.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/EvgeniyBurdin/valdec/alerts/) [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/EvgeniyBurdin/valdec.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/EvgeniyBurdin/valdec/context:python) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/valdec)
+ 
+Decorator for validating arguments and/or result of functions and methods of a class against annotations.
 
-Decorator for checking arguments and/or result of functions and class methods. Can be used in synchronous or asynchronous version.
+Can be used in synchronous or asynchronous version.
+
 
 ## Installation
 
@@ -14,7 +17,7 @@ pip install valdec
 
 ### Default
 
-Based on the default validator `pydantic.Basemodel`:
+Based on the validator `pydantic.BaseModel`:
 
 ```bash
 pip install pydantic
@@ -96,11 +99,11 @@ from typing import List
 
 from valdec.data_classes import Settings
 from valdec.dec import validate as _validate
-from valdec.val_validated_dc import validator
+from valdec.val_validated_dc import validator as dc_validator
 from validated_dc import ValidatedDC
 
 custom_settings = Settings(
-    function_for_validation=validator,
+    function_for_validation=dc_validator,
 )
 
 
