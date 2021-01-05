@@ -1,7 +1,7 @@
 import inspect
 from typing import Any, Callable, Dict, List, Tuple
 
-from data_classes import FieldData, Settings
+from valdec.data_classes import FieldData, Settings
 
 
 def get_data_with_annotations(

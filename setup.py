@@ -4,11 +4,11 @@ from setuptools import setup
 
 setup(
     name='valdec',
-    version='0.9.0',
+    version='0.9.1',
     license='MIT',
     author='Evgeniy Burdin',
     author_email='e.s.burdin@mail.ru',
-    py_modules=['valdec'],
+    packages=['valdec'],
     description='Decorator for validating function arguments and result.',
     long_description=open(join(dirname(__file__), 'README.md')).read(),
     long_description_content_type="text/markdown",

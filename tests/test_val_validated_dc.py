@@ -2,8 +2,9 @@ from dataclasses import dataclass
 from typing import List
 
 import pytest
-from val_validated_dc import ValidationError, validator
 from validated_dc import ValidatedDC
+
+from valdec.val_validated_dc import ValidationError, validator
 
 
 @dataclass

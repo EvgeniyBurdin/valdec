@@ -1,6 +1,8 @@
 import pytest
+
 from pydantic import StrictInt, StrictStr
-from valdec import validate
+
+from valdec.dec import validate
 
 
 @validate  # Проверяет все аргументы с аннотацией, и return

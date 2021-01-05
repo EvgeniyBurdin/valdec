@@ -1,12 +1,14 @@
 import pytest
-from data_classes import FieldData
+
 from pydantic import StrictInt
-from val_pydantic import validator as pydantic_val_func
-from valdec import default_settings
-from valdec_utils import (after, before, get_annotations_values_dicts,
+
+from valdec.data_classes import FieldData
+from valdec.dec import default_settings
+from valdec.utils import (after, before, get_annotations_values_dicts,
                           get_data_for_validation, get_data_with_annotations,
                           get_names_from_decorator, replace_args_kwargs,
                           run_validation)
+from valdec.val_pydantic import validator as pydantic_val_func
 
 
 def func_without_annotations_1():
