@@ -74,7 +74,6 @@ group = [
 ]
 
 result = func("any type", "any type",  group)
-print(result)
 for i, student in enumerate(result):
     assert student.name == group[i]["name"]
     assert student.profile.age == group[i]["profile"]["age"]
