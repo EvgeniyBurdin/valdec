@@ -63,8 +63,8 @@ class Student(BaseModel):
     profile: Profile
 
 
-@validate("group")
-def func(i: StrictInt, s: StrictStr, group: List[Student]) -> List[Student]:
+@validate("group")  # only "group"
+def func(i: StrictInt, s: StrictStr, group: List[Student]):
     return group
 
 
@@ -149,8 +149,8 @@ class Student(ValidatedDC):
     profile: Profile
 
 
-@validate("group")
-def func(i: int, s: str, group: List[Student]) -> List[Student]:
+@validate("group") # only "group"
+def func(i: int, s: str, group: List[Student]):
     return group
 
 
