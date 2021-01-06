@@ -1,7 +1,10 @@
 import inspect
+import logging
 from typing import Any, Callable, Dict, List, Tuple
 
 from valdec.data_classes import FieldData, Settings
+
+logger = logging.getLogger()
 
 
 def get_data_with_annotations(
@@ -178,8 +181,7 @@ def before(
         )
         if data_for_validation:
 
-            # TODO: переделать в лог
-            print("LOG: Валидируем Аргументы:", data_for_validation)
+            logger.info(f"Going to validate arguments: {data_for_validation}")
 
             replaceable_args = run_validation(
                 data_for_validation,
@@ -189,6 +191,9 @@ def before(
                 is_arguments=True,
             )
             if replaceable_args is not None:
+
+                logger.info(f"Replace: {replaceable_args}")
+
                 args, kwargs = replace_args_kwargs(
                     func, args, kwargs, replaceable_args
                 )
@@ -219,9 +224,11 @@ def after(
         data_with_annotation, names_from_decorator, exclude
     )
     if data_for_validation:
-        # TODO: переделать в лог
-        print("LOG: Валидируем Результат:", data_for_validation)
+
         data_for_validation = [FieldData("result", result, annotation), ]
+
+        logger.info(f"Going to validate: {data_for_validation}")
+
         replaceable = run_validation(
             data_for_validation,
             settings.validator,
@@ -230,6 +237,9 @@ def after(
             is_arguments=False,
         )
         if replaceable is not None:
+
+            logger.info(f"Replace: {replaceable}")
+
             result = replaceable["result"]
 
     return result
