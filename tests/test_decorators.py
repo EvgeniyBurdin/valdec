@@ -1,7 +1,9 @@
+import asyncio
+
 import pytest
 from pydantic import StrictInt, StrictStr
 
-from valdec.decorators import validate
+from valdec.decorators import async_validate, validate
 from valdec.utils import ValidationArgumentsError, ValidationReturnError
 
 
@@ -38,3 +40,21 @@ def test_validate_simple_exclude_false():
     # Примечание: в сообщение об ошибке результата всегда "result", а не
     #             "return". Но в декораторе надо указывать именно "return" если
     #             необходимо управлять валидацией результата.
+
+
+@async_validate  # Проверяет все аргументы с аннотацией, и return
+async def func_a(i: StrictInt, s: StrictStr) -> StrictStr:
+    return s
+
+
+def test_validate_simple_exclude_false_async():
+
+    s = "string"
+
+    assert asyncio.run(func_a(1, s)) == s
+    with pytest.raises(TypeError):
+        asyncio.run(func_a())        # Ошибка в сигнатуре
+    with pytest.raises(ValidationArgumentsError):
+        asyncio.run(func_a("1", s))  # Ошибка в аргументе
+    with pytest.raises(ValidationArgumentsError):
+        asyncio.run(func_a(1, 2))    # Ошибка в аргументе

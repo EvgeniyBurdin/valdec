@@ -98,11 +98,11 @@ from typing import List
 
 from valdec.data_classes import Settings
 from valdec.decorators import validate as _validate
-from valdec.val_validated_dc import validator as dc_validator
+from valdec.validators import validated_dc_validator 
 from validated_dc import ValidatedDC
 
 custom_settings = Settings(
-    function_for_validation=dc_validator,
+    function_for_validation=validated_dc_validator,
 )
 
 

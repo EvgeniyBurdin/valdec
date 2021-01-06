@@ -3,7 +3,8 @@ from typing import List
 import pytest
 from pydantic import BaseModel, StrictInt, StrictStr
 
-from valdec.validators import ValidationError, validator
+from valdec.validators import ValidationError
+from valdec.validators import pydantic_validator as validator
 
 
 class Profile(BaseModel):
@@ -22,7 +23,7 @@ group = [
 ]
 
 
-def test_validator():
+def test_pydantic_validator():
 
     global group
 

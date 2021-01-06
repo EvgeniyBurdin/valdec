@@ -1,9 +1,5 @@
 [report]
 include =
-    valdec/data_classes.py
-    valdec/val_pydantic.py
-    valdec/val_validated_dc.py
-    valdec/dec.py
-    valdec/utils.py
+    valdec/*.py
 
 show_missing = true
