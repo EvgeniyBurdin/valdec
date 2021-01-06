@@ -81,9 +81,9 @@ result = func("i not int", "string",  data_for_group)
 assert isinstance(result, list)
 ```
 
-### validated-dc
+### validated_dc_validator
 
-`valdec` comes with support for `pydantic` and `validated-dc`. By default, `pydantic` is used for validation, but you can change this very easily:
+It is possible to enable validation with [validated_dc.ValidatedDC](https://github.com/EvgeniyBurdin/validated_dc). To do this, change the reference to the validator-function in the decorator settings:
 
 ```bash
 pip install validated-dc
