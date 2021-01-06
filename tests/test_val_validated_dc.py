@@ -58,9 +58,10 @@ def test_validator():
         validator(annotations, values, is_replace=False, extra={})
 
     # Сообщение об ощибке содержит имена полей (всей цепочки, если она есть)
-    error = str(error)
+    error = str(error.value)
     assert "group" in error
-    assert "name" in error
+    assert "profile" in error
+    assert "city" in error
 
 
 def test_validator_without_replaced():
