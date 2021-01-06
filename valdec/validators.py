@@ -11,11 +11,12 @@ class ValidationError(Exception):
     pass
 
 
-# Валидатор на основе pydantic.BaseModel -------------------------------------
-
 # Префикс к именам полей, которые будут использоваться для создания
 # валидирующего класса. Он необходим для предотвращения конфликта имен.
-NAME_PREFIX = "field_name_pref_"
+NAME_PREFIX = "field__nm__prfx_"
+
+
+# Валидатор на основе pydantic.BaseModel -------------------------------------
 
 
 class ModelForValidation(BaseModel):
@@ -75,11 +76,17 @@ def pydantic_validator(
         error_str = str(error).replace(NAME_PREFIX, "")
         raise ValidationError(error_str)
 
-    return {
-        name.replace(NAME_PREFIX, ""): value
-        for name, value in dict(instance).items()
-        # TODO Сделать фильтр для полей содержащих экземпляры BaseModel
-    } if is_replace else None
+    result = None
+    if is_replace:
+        replaceable = {
+            name.replace(NAME_PREFIX, ""): value
+            for name, value in dict(instance).items()
+            # TODO Сделать фильтр для полей содержащих экземпляры BaseModel
+        }
+        if replaceable:
+            result = replaceable
+
+    return result
 
 
 # Валидатор на основе validated_dc.ValidatedDC -------------------------------
@@ -89,6 +96,8 @@ def validated_dc_validator(
     is_replace: bool, extra: dict
 ) -> Optional[Dict[str, Any]]:
     """ Функция для проверки соответствия значений полей их аннотациям.
+
+        Возвращает НЕпустой словарь с именами и значениями или None.
 
         :annotations: Словарь, который содержит имена полей и их аннотации.
         :values:      Словарь, который содержит имена полей и их значения.
@@ -116,17 +125,29 @@ def validated_dc_validator(
         base_val_class = ValidatedDC
 
     ValidatorClass = make_dataclass(
-        "ValidatorClass", list(annotations.items()),
+        "ValidatorClass",
+        [(NAME_PREFIX+n, a) for n, a in annotations.items()],
         bases=(base_val_class, )
     )
 
-    instance: ValidatedDC = ValidatorClass(**values)
+    instance: ValidatedDC = ValidatorClass(
+        **{NAME_PREFIX+n: v for n, v in values.items()}
+    )
 
-    errors = instance.get_errors()
-    if errors is not None:
-        raise ValidationError(str(errors))
+    error = instance.get_errors()
+    if error is not None:
+        error_str = str(error).replace(NAME_PREFIX, "")
+        raise ValidationError(error_str)
 
-    return {
-        field.name: getattr(instance, field.name) for field in fields(instance)
-        # TODO Сделать фильтр для полей содержащих экземпляры ValidatedDC
-    } if is_replace else None
+    result = None
+    if is_replace:
+        replaceable = {
+            field.name.replace(NAME_PREFIX, ""): getattr(instance, field.name)
+            for field in fields(instance)
+            # Для замены вернутся только те поля, в которых была замена
+            if field.name in instance._replaced_field_names
+        }
+        if replaceable:
+            result = replaceable
+
+    return result

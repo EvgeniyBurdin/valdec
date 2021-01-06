@@ -236,7 +236,10 @@ def after(
             settings.extra,
             is_arguments=False,
         )
-        if replaceable is not None:
+
+        # Вторая проверка (and replaceable) не нужна, но если будут подключать
+        # сторонние валидаторы, она пригодится
+        if replaceable is not None and replaceable:
 
             logger.debug(f"Replace: {replaceable}")
 

@@ -20,26 +20,31 @@ class Student(ValidatedDC):
     profile: Profile
 
 
-group = [
-    {"name": "Peter", "profile": {"age": 22, "city": "Samara"}},
-    {"name": "Elena", "profile": {"age": 20, "city": "Kazan"}},
-]
-
-
 def test_validator():
 
-    global group
+    group = [
+        {"name": "Peter", "profile": {"age": 22, "city": "Samara"}},
+        {"name": "Elena", "profile": {"age": 20, "city": "Kazan"}},
+    ]
 
-    annotations = {
-        "group": List[Student], "specialty": str
-    }
+    # Аннотации аргументов в функции
+    annotations = {"group": List[Student], "specialty": str}
+    # Связанные с ними поступившие значения для валидации
     values = {"group": group, "specialty": "programmers"}
+
+    # Данные для подмены не нужны
     result = validator(annotations, values, is_replace=False, extra={})
     assert result is None
 
-    # Попросим подмену результата установив is_replace=True
+    # Попросим данные для подмены установив is_replace=True
     result = validator(annotations, values, is_replace=True, extra={})
-    assert result is not None
+
+    assert isinstance(result, dict)
+
+    # Так как поле "specialty" в аннотации не имеет экземпляра валидирующего
+    # класса, то его не должно быть в результате:
+    assert result.get("specialty") is None
+
     for i, student in enumerate(result["group"]):
         # Так как ключ "group" имеет аннотацию, в которой есть наследник
         # ValidatedDC, то к наследнику можно теперь обращаться "через точку"
@@ -56,5 +61,19 @@ def test_validator():
     error = str(error)
     assert "group" in error
     assert "name" in error
-    # assert "city" in error  # Поле "city" так же есть в сообщении об ошибке,
-    # но python или pytest его здесь "обрезал".
+
+
+def test_validator_without_replaced():
+
+    # Если были запрошены данные для замены, но по сравнению с исходными
+    # данными ничего не изменилось (то есть в аннотациях нет наследников
+    # валидирующего класса), то должно вернуться None (а не пустой словарь)
+
+    # Аннотации (пусть на примере результата)
+    annotations = {"result": int}
+    # Связанные с ними поступившие значения для валидации
+    values = {"result": 1}
+
+    # Попросим данные для подмены  установив is_replace=True
+    result = validator(annotations, values, is_replace=True, extra={})
+    assert result is None

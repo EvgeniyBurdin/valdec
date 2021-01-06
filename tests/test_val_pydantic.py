@@ -17,26 +17,27 @@ class Student(BaseModel):
     profile: Profile
 
 
-group = [
-    {"name": "Peter", "profile": {"age": 22, "city": "Samara"}},
-    {"name": "Elena", "profile": {"age": 20, "city": "Kazan"}},
-]
-
-
 def test_pydantic_validator():
 
-    global group
+    group = [
+        {"name": "Peter", "profile": {"age": 22, "city": "Samara"}},
+        {"name": "Elena", "profile": {"age": 20, "city": "Kazan"}},
+    ]
 
-    annotations = {
-        "group": List[Student], "specialty": str
-    }
+    # Аннотации аргументов в функции
+    annotations = {"group": List[Student], "specialty": str}
+    # Связанные с ними поступившие значения для валидации
     values = {"group": group, "specialty": "programmers"}
+
+    # Данные для подмены не нужны
     result = validator(annotations, values, is_replace=False, extra={})
     assert result is None
 
-    # Попросим подмену результата установив is_replace=True
+    # Попросим данные для подмены установив is_replace=True
     result = validator(annotations, values, is_replace=True, extra={})
-    assert result is not None
+
+    assert isinstance(result, dict)
+
     for i, student in enumerate(result["group"]):
         # Так как ключ "group" имеет аннотацию, в которой есть наследник
         # BaseModel, то к наследнику можно теперь обращаться "через точку"

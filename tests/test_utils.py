@@ -103,14 +103,23 @@ def test_run_validation():
     s = FieldData("s", "2", str)
     fields = [i, s]
 
-    result = run_validation(
+    replaceable = run_validation(
         fields=fields,
         validator=pydantic_validator,
         is_replace=False,
         extra={},
         is_arguments=True,
     )
-    assert result is None
+    assert replaceable is None
+
+    replaceable = run_validation(
+        fields=[FieldData("result", 1, int)],
+        validator=pydantic_validator,
+        is_replace=False,
+        extra={},
+        is_arguments=False,
+    )
+    assert replaceable is None
 
 
 def func_with_args(i: int, s: int):
@@ -271,7 +280,7 @@ def test_after():
 
     with pytest.raises(ValidationReturnError) as error:
 
-        # Функци вернула невалидное значение (не StrictInt), должно
+        # Функци вернула невалидное значение (то есть не StrictInt), должно
         # подняться исключение
         result = "1"
         after(
@@ -297,7 +306,7 @@ def test_after():
 
     with pytest.raises(ValidationReturnError) as error:
 
-        # Функци вернула невалидное значение (не None), должно
+        # Функци вернула невалидное значение (то есть не None), должно
         # подняться исключение
         result = "1"
         after(
