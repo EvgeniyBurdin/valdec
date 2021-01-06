@@ -184,7 +184,7 @@ def before(
             replaceable_args = run_validation(
                 data_for_validation,
                 settings.validator,
-                settings.is_replace_the_args,
+                settings.is_replace_args,
                 settings.extra,
                 is_arguments=True,
             )
@@ -225,7 +225,7 @@ def after(
         replaceable = run_validation(
             data_for_validation,
             settings.validator,
-            settings.is_replace_the_result,
+            settings.is_replace_result,
             settings.extra,
             is_arguments=False,
         )
