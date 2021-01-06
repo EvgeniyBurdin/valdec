@@ -12,6 +12,8 @@ custom_settings = Settings(
     is_replace_result=True,  # default
     extra={}                 # default
 )
+
+
 def validate(*args, **kwargs):  # define new decorator
     kwargs["settings"] = custom_settings
     return _validate(*args, **kwargs)
@@ -23,12 +25,14 @@ def validate(*args, **kwargs):  # define new decorator
 def func(i: int, s: str) -> int:
     return i
 
+
 assert func(1, "s") == 1
 
 
 @validate("s")  # only "s"
 def func(i: int, s: str) -> int:
     return i
+
 
 assert func("not int", "s") == "not int"
 
@@ -37,12 +41,14 @@ assert func("not int", "s") == "not int"
 def func(i: int, s: str) -> int:
     return int(i)
 
+
 assert func("1", "s") == 1
 
 
 @validate("i", exclude=True)  # exclude "i" (only "s" and return)
 def func(i: int, s: str) -> int:
     return int(i)
+
 
 assert func("1", "s") == 1
 
@@ -52,15 +58,18 @@ data_for_group = [
     {"name": "Elena", "profile": {"age": 20, "city": "Kazan"}},
 ]
 
+
 @dataclass
 class Profile(ValidatedDC):
     age: int
     city: str
 
+
 @dataclass
 class Student(ValidatedDC):
     name: str
     profile: Profile
+
 
 @validate("s", "group")  # only "s" and "group"
 def func(i: int, s: str, group: Optional[List[Student]] = None):
@@ -76,6 +85,7 @@ def func(i: int, s: str, group: Optional[List[Student]] = None):
         assert isinstance(student.profile.age, int)
 
     return group
+
 
 result = func("i not int", "string",  data_for_group)
 # The result can be any, because it is not validated.., now this is a list:
