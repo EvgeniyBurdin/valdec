@@ -7,7 +7,7 @@ from valdec.utils import (ValidationArgumentsError, ValidationReturnError,
                           get_data_for_validation, get_data_with_annotations,
                           get_names_from_decorator, replace_args_kwargs,
                           run_validation)
-from valdec.val_pydantic import validator as pydantic_val_func
+from valdec.validators import validator as pydantic_val_func
 
 
 def func_without_annotations_1():

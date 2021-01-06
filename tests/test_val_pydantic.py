@@ -3,7 +3,7 @@ from typing import List
 import pytest
 from pydantic import BaseModel, StrictInt, StrictStr
 
-from valdec.val_pydantic import ValidationError, validator
+from valdec.validators import ValidationError, validator
 
 
 class Profile(BaseModel):
