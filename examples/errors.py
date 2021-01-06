@@ -23,7 +23,7 @@ foo.bar_1(1, "2")  # ok
 try:
     foo.bar_1(1, 2)
 except ValidationArgumentsError as error:
-    assert "s" in str(error)
+    print(type(error), error, "\n")
 
 
 foo.bar_2(None, 1)  # ok
@@ -31,4 +31,4 @@ foo.bar_2(None, 1)  # ok
 try:
     foo.bar_2(1, 2)
 except ValidationReturnError as error:
-    assert "result" in str(error)
+    print(type(error), error)
