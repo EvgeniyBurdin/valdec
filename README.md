@@ -6,6 +6,10 @@ Decorator for validating arguments and/or result of functions and methods of a c
 
 Can be used in synchronous or asynchronous version.
 
+Validation is supported using [pydantic.BaseModel](https://github.com/samuelcolvin/pydantic) and [validated_dc.ValidatedDC](https://github.com/EvgeniyBurdin/validated_dc).
+
+You can easily add support for any other validator. To do this, you need to write your own validator-function and specify it in the settings for decorator (how to do this - see the examples below).
+
 ## Installation
 
 ```bash
