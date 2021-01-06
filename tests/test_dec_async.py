@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 from pydantic import StrictInt, StrictStr
-from valdec.dec import async_validate
+from valdec.decorators import async_validate
 from valdec.utils import ValidationArgumentsError
 
 

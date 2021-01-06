@@ -1,7 +1,7 @@
 import pytest
 from pydantic import StrictInt, StrictStr
 
-from valdec.dec import validate
+from valdec.decorators import validate
 from valdec.utils import ValidationArgumentsError, ValidationReturnError
 
 

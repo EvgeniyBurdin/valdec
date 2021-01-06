@@ -26,7 +26,7 @@ pip install pydantic
 from typing import List
 
 from pydantic import BaseModel, StrictInt, StrictStr
-from valdec.dec import validate
+from valdec.decorators import validate
 
 
 @validate  # all with annotations and return
@@ -97,7 +97,7 @@ from dataclasses import dataclass
 from typing import List
 
 from valdec.data_classes import Settings
-from valdec.dec import validate as _validate
+from valdec.decorators import validate as _validate
 from valdec.val_validated_dc import validator as dc_validator
 from validated_dc import ValidatedDC
 

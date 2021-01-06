@@ -1,7 +1,7 @@
 import pytest
 from pydantic import StrictInt
 from valdec.data_classes import FieldData
-from valdec.dec import default_settings
+from valdec.decorators import default_settings
 from valdec.utils import (ValidationArgumentsError, ValidationReturnError,
                           after, before, get_annotations_values_dicts,
                           get_data_for_validation, get_data_with_annotations,
