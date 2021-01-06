@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from pydantic import BaseModel, StrictInt, StrictStr
 from valdec.decorators import validate
+# from valdec.decorators import async_validate  # Use for async functions
 
 
 @validate  # all arguments with annotations and return
