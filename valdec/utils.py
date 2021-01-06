@@ -79,7 +79,7 @@ class ValidationReturnError(ValidationError):
 
 def run_validation(
     fields: List[FieldData],
-    function_for_validation: Callable,
+    validator: Callable,
     is_replace: bool,
     extra: dict,
     is_arguments: bool,
@@ -89,7 +89,7 @@ def run_validation(
     """
     try:
         annotations, values = get_annotations_values_dicts(fields)
-        result = function_for_validation(
+        result = validator(
             annotations, values, is_replace, extra
         )
     except Exception as error:
@@ -183,7 +183,7 @@ def before(
 
             replaceable_args = run_validation(
                 data_for_validation,
-                settings.function_for_validation,
+                settings.validator,
                 settings.is_replace_the_args,
                 settings.extra,
                 is_arguments=True,
@@ -224,7 +224,7 @@ def after(
         data_for_validation = [FieldData("result", result, annotation), ]
         replaceable = run_validation(
             data_for_validation,
-            settings.function_for_validation,
+            settings.validator,
             settings.is_replace_the_result,
             settings.extra,
             is_arguments=False,

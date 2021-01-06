@@ -102,7 +102,7 @@ from valdec.validators import validated_dc_validator
 from validated_dc import ValidatedDC
 
 custom_settings = Settings(
-    function_for_validation=validated_dc_validator,
+    validator=validated_dc_validator,
 )
 
 

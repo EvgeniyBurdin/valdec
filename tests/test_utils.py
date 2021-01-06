@@ -105,7 +105,7 @@ def test_run_validation():
 
     result = run_validation(
         fields=fields,
-        function_for_validation=pydantic_validator,
+        validator=pydantic_validator,
         is_replace=False,
         extra={},
         is_arguments=True,

@@ -67,7 +67,7 @@ from valdec.validators import pydantic_validator
 from valdec.utils import after, before
 
 default_settings = Settings(
-    function_for_validation=pydantic_validator,
+    validator=pydantic_validator,
 )
 
 
