@@ -290,8 +290,8 @@ def test_after():
             exclude=False,
             settings=default_settings
         )
-    # Сообщение об ошибке должно содержать имя "result"
-    assert "result" in str(error)
+    # Сообщение об ошибке должно содержать имя "return"
+    assert "return" in str(error)
 
     result = None
 
@@ -316,5 +316,5 @@ def test_after():
             exclude=False,  # Валидируются всё
             settings=default_settings
         )
-    # Сообщение об ошибке должно содержать имя "result"
-    assert "result" in str(error)
+    # Сообщение об ошибке должно содержать имя "return"
+    assert "return" in str(error)

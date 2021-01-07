@@ -36,10 +36,7 @@ def test_validate_simple_exclude_false():
     with pytest.raises(ValidationReturnError) as error:
         func_2(1, 2)
     # Была ошибка в результате, так как "s" не проверяем, убедимся в этом:
-    assert "result" in str(error)
-    # Примечание: в сообщение об ошибке результата всегда "result", а не
-    #             "return". Но в декораторе надо указывать именно "return" если
-    #             необходимо управлять валидацией результата.
+    assert "return" in str(error)
 
 
 @async_validate  # Проверяет все аргументы с аннотацией, и return

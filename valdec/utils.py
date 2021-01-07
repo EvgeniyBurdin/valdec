@@ -225,8 +225,6 @@ def after(
     )
     if data_for_validation:
 
-        data_for_validation = [FieldData("result", result, annotation), ]
-
         logger.debug(f"Going to validate: {data_for_validation}")
 
         replaceable = run_validation(
@@ -243,6 +241,6 @@ def after(
 
             logger.debug(f"Replace: {replaceable}")
 
-            result = replaceable["result"]
+            result = replaceable["return"]
 
     return result
