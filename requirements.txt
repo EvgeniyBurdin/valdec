@@ -1,2 +1,2 @@
 pydantic==1.7.3
-validated-dc==1.2.5
+validated-dc==1.3.3
