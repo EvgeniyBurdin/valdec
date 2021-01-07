@@ -4,7 +4,7 @@ from dataclasses import fields, make_dataclass
 from typing import Any, Dict, Optional
 
 from pydantic import BaseModel, Extra, create_model, error_wrappers
-from validated_dc import ValidatedDC
+from validated_dc import ValidatedDC, get_errors
 
 
 class ValidationError(Exception):
@@ -134,10 +134,10 @@ def validated_dc_validator(
         **{NAME_PREFIX+n: v for n, v in values.items()}
     )
 
-    error = instance.get_errors()
-    if error is not None:
-        error_str = str(error).replace(NAME_PREFIX, "")
-        raise ValidationError(error_str)
+    errors = get_errors(instance)
+    if errors is not None:
+        str_errors = str(errors).replace(NAME_PREFIX, "")
+        raise ValidationError(str_errors)
 
     result = None
     if is_replace:
