@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='valdec',
-    version='1.0.4',
+    version='1.1.0',
     license='MIT',
     author='Evgeniy Burdin',
     author_email='e.s.burdin@mail.ru',

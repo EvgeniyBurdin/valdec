@@ -28,10 +28,10 @@
     2. Проверка всех аргументов и возвращаемого значения (в этом примере
     возвращаемое значение должно быть bool)
     ```
-    @validator
+    @validate
     def func(a: int, b: Optional[str] = None) -> bool: ...
     ```
-    *Примечание: в примерах 1 и 2 декоратор можно вызвать и так: @validator()
+    *Примечание: в примерах 1 и 2 декоратор можно вызвать и так: @validate()
 
     3. Проверка только аргумента "a"
     ```
@@ -41,7 +41,7 @@
 
     4. Проверка только аргумента "a" и возвращаемого значения
     ```
-    @validator("a", "return")
+    @validate("a", "return")
     def func(a: int, b: Optional[int] = None) -> int: ...
     ```
 
@@ -53,7 +53,7 @@
 
     6. Проверка всех аргументов но не "a" и не возвращаемого значения
     ```
-    @validator("a", "return", exclude=True)
+    @validate("a", "return", exclude=True)
     def func(a: int, b: Optional[int] = None) -> int: ...
     ```
 
