@@ -2,7 +2,7 @@ from typing import Optional
 
 from pydantic import StrictInt, StrictStr
 from valdec.decorators import validate
-from valdec.utils import ValidationArgumentsError, ValidationReturnError
+from valdec.errors import ValidationArgumentsError, ValidationReturnError
 
 
 class Foo:

@@ -3,6 +3,7 @@ import logging
 from typing import Any, Callable, Dict, List, Tuple
 
 from valdec.data_classes import FieldData, Settings
+from valdec.errors import ValidationArgumentsError, ValidationReturnError
 
 logger = logging.getLogger()
 
@@ -66,18 +67,6 @@ def get_annotations_values_dicts(
         values[field_name] = field.value
 
     return annotations, values
-
-
-class ValidationError(Exception):
-    pass
-
-
-class ValidationArgumentsError(ValidationError):
-    pass
-
-
-class ValidationReturnError(ValidationError):
-    pass
 
 
 def run_validation(

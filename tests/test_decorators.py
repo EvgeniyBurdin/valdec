@@ -4,7 +4,7 @@ import pytest
 from pydantic import StrictInt, StrictStr
 
 from valdec.decorators import async_validate, validate
-from valdec.utils import ValidationArgumentsError, ValidationReturnError
+from valdec.errors import ValidationArgumentsError, ValidationReturnError
 
 
 @validate  # Проверяет все аргументы с аннотацией, и return

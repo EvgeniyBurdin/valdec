@@ -1,10 +1,10 @@
 from valdec.data_classes import Settings
 from valdec.decorators import validate as _validate
-from valdec.utils import ValidationArgumentsError
-from valdec.validators import validated_dc_validator
+from valdec.errors import ValidationArgumentsError
+from valdec.validator_validated_dc import validator
 
 custom_settings = Settings(
-    validator=validated_dc_validator,  # function for validation
+    validator=validator,  # function for validation
 )
 
 

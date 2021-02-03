@@ -63,11 +63,11 @@
 import functools
 
 from valdec.data_classes import Settings
-from valdec.validators import pydantic_validator
+from valdec.validator_pydantic import validator
 from valdec.utils import after, before
 
 default_settings = Settings(
-    validator=pydantic_validator,
+    validator=validator,
 )
 
 

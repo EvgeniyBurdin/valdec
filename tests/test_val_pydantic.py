@@ -3,8 +3,8 @@ from typing import List
 import pytest
 from pydantic import BaseModel, StrictInt, StrictStr
 
-from valdec.validators import ValidationError
-from valdec.validators import pydantic_validator as validator
+from valdec.errors import ValidationError
+from valdec.validator_pydantic import validator
 
 
 class Profile(BaseModel):

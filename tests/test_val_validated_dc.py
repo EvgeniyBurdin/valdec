@@ -4,8 +4,8 @@ from typing import List
 import pytest
 from validated_dc import ValidatedDC
 
-from valdec.validators import ValidationError
-from valdec.validators import validated_dc_validator as validator
+from valdec.errors import ValidationError
+from valdec.validator_validated_dc import validator
 
 
 @dataclass

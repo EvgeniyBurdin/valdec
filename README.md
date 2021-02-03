@@ -97,11 +97,11 @@ from typing import List, Optional
 
 from valdec.data_classes import Settings
 from valdec.decorators import validate as _validate
-from valdec.validators import validated_dc_validator
+from valdec.validator_validated_dc import validator 
 from validated_dc import ValidatedDC
 
 custom_settings = Settings(
-    validator=validated_dc_validator,  # function for validation
+    validator=validator,     # function for validation
     is_replace_args=True,    # default
     is_replace_result=True,  # default
     extra={}                 # default
@@ -185,7 +185,7 @@ from typing import Optional
 
 from pydantic import StrictInt, StrictStr
 from valdec.decorators import validate
-from valdec.utils import ValidationArgumentsError, ValidationReturnError
+from valdec.errors import ValidationArgumentsError, ValidationReturnError
 
 
 class Foo:
